@@ -18,6 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-indigo-100">
         <main className="my-0 py-16">{children}</main>
+        <h1>footer</h1>
       </body>
     </html>
   );

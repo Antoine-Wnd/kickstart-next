@@ -34,7 +34,7 @@ export default async function CampaignIndex() {
         ))}
       </div>
       <Button variant="blue">
-        <PlusCircledIcon className="mr-2 h-4 w-4" /> Login with Email
+        <PlusCircledIcon className="mr-2 h-4 w-4" /> Créer une campagne
       </Button>
     </div>
   );
