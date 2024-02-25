@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import Header from "@/components/Header";
 
 export const metadata: Metadata = {
   title: "Kickstart-Dapp",
@@ -17,6 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-indigo-100">
+        <Header />
         <main className="my-0 py-16">{children}</main>
         <h1>footer</h1>
       </body>
