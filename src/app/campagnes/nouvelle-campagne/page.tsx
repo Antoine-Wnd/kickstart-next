@@ -17,14 +17,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-const campaignFormSchema = z.object({
-  minimum: z.number({
-    required_error: "Veuillez entrer un minimum",
-    invalid_type_error: "Veuillez entrer un nombre",
-  }),
-});
-
 function CampaignNew() {
+  const campaignFormSchema = z.object({
+    minimum: z
+      .number()
+      .min(0, { message: "La valeur doit être un nombre positif." }),
+  });
+
   const form = useForm<z.infer<typeof campaignFormSchema>>({
     resolver: zodResolver(campaignFormSchema),
     defaultValues: {
@@ -38,6 +37,7 @@ function CampaignNew() {
 
   return (
     <div>
+      <h3 className=" text-xl mb-3">Créer une campagne</h3>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-96">
           <FormField
@@ -45,18 +45,18 @@ function CampaignNew() {
             name="minimum"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Valeur minimal</FormLabel>
+                <FormLabel>Contribution minimal</FormLabel>
                 <FormControl>
-                  <Input placeholder="20" {...field} />
+                  <Input type="number" placeholder="20" {...field} />
                 </FormControl>
                 <FormDescription>
-                  Ceci est la valeur minimum pour participer a votre campagne
+                  Ceci est la valeur minimum pour participer à votre campagne
                 </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+          <Button type="submit">Créer!</Button>
         </form>
       </Form>
     </div>
