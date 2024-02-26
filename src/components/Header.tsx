@@ -2,6 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { PlusIcon } from "@radix-ui/react-icons";
 
 import {
   NavigationMenuItem,
@@ -10,9 +11,10 @@ import {
 
 function Header() {
   return (
-    <div className="bg-gray-700 p-4">
-      <div className=" w-full mx-auto px-4 sm:px-6 lg:px-8">
-        <NavigationMenu className="flex items-center justify-around">
+    <div className="bg-gray-700 p-4 rounded-lg drop-shadow-md mt-2 mx-2">
+      <div className="flex justify-between items-center">
+        {/* Logo à gauche */}
+        <NavigationMenu>
           <NavigationMenuItem className="mr-4 list-none">
             <Link href="/">
               <Image
@@ -24,9 +26,19 @@ function Header() {
               />
             </Link>
           </NavigationMenuItem>
-          <NavigationMenuItem className=" list-none">
-            <Link href="/" className="text-white ">
-              Documentation
+        </NavigationMenu>
+
+        {/* Texte à droite */}
+        <NavigationMenu>
+          <NavigationMenuItem className="list-none">
+            <Link href="/" className="text-white px-5">
+              Campagnes
+            </Link>
+          </NavigationMenuItem>
+          <span className=" h-10 w-[2px] bg-white mr-1"></span>
+          <NavigationMenuItem className="list-none">
+            <Link href="/campagnes/nouvelle-campagne" className="text-white">
+              <PlusIcon className=" mx-5 h-5 w-5 " />
             </Link>
           </NavigationMenuItem>
         </NavigationMenu>

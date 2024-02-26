@@ -12,30 +12,31 @@ export default async function CampaignIndex() {
 
   return (
     <div>
-      <h2>Campagnes en cours </h2>
-      <div>
-        {campaigns.map((campaign, index) => (
-          //mapping des campagnes en ligne
-          <Card className="mx-7" key={index}>
-            <CardContent className="grid gap-4 p-5">
-              <div className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0">
-                <span className="flex h-2 w-2 translate-y-1 rounded-full bg-[#003049]" />
-                <div className="space-y-1">
-                  <p className="text-sm font-medium leading-none">{campaign}</p>
-                  <p className="text-sm text-muted-foreground">
-                    <a href="#" className="text-[#669bbc] font-bold">
-                      Voir la campagne
-                    </a>
-                  </p>
+      <h2 className=" text-xl font-semibold">Campagnes en cours </h2>
+      <div className="my-5 flex justify-around">
+        <div>
+          {campaigns.map((campaign, index) => (
+            //mapping des campagnes en ligne
+            <Card className="mx-7 mb-5" key={index}>
+              <CardContent className="p-5 px-10">
+                <div>
+                  <div className="space-y-1">
+                    <p className="text-md font-medium">{campaign}</p>
+                    <p className="text-sm text-muted-foreground">
+                      <a href="#" className="text-[#669bbc] font-bold">
+                        Voir la campagne
+                      </a>
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+        <Button variant="blue">
+          <PlusCircledIcon className="mr-2 h-4 w-4" /> Créer une campagne
+        </Button>
       </div>
-      <Button variant="blue">
-        <PlusCircledIcon className="mr-2 h-4 w-4" /> Créer une campagne
-      </Button>
     </div>
   );
 }
