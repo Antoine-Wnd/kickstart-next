@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 import "./globals.css";
+import Link from "next/link";
 
 export default async function CampaignIndex() {
   // Rendez la fonction asynchrone
@@ -23,7 +24,7 @@ export default async function CampaignIndex() {
                   <div className="space-y-1">
                     <p className="text-md font-medium">{campaign}</p>
                     <p className="text-sm text-muted-foreground">
-                      <a href="#" className="text-[#669bbc] font-bold">
+                      <a href="#" className="text-[#669bbc] font-black">
                         Voir la campagne
                       </a>
                     </p>
@@ -33,8 +34,14 @@ export default async function CampaignIndex() {
             </Card>
           ))}
         </div>
-        <Button variant="blue">
-          <PlusCircledIcon className="mr-2 h-4 w-4" /> Créer une campagne
+        <Button variant="blue" className="py-5 px-10">
+          <Link
+            href="/campagnes/nouvelle-campagne"
+            className="flex items-center justify-center"
+          >
+            <PlusCircledIcon className="mr-2 mt-[2px] h-4 w-4" /> Créer une
+            campagne
+          </Link>
         </Button>
       </div>
     </div>
