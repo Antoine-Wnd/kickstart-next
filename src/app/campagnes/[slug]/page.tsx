@@ -9,9 +9,11 @@ const Page = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // @ts-ignore
         const summary = await campaign.methods.getSummary().call();
         setSummary(summary);
       } catch (error) {
+        // @ts-ignore
         setErrorMessage(error.message);
       }
     };
