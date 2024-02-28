@@ -6,7 +6,6 @@ import "./globals.css";
 import Link from "next/link";
 
 export default async function CampaignIndex() {
-  // Rendez la fonction asynchrone
   const campaigns = await FetchCampaigns();
 
   console.log(campaigns);
@@ -24,9 +23,12 @@ export default async function CampaignIndex() {
                   <div className="space-y-1">
                     <p className="text-md font-medium">{campaign}</p>
                     <p className="text-sm text-muted-foreground">
-                      <a href="#" className="text-[#669bbc] font-black">
+                      <Link
+                        href={`/campagnes/${campaign}`}
+                        className="text-[#669bbc] font-black"
+                      >
                         Voir la campagne
-                      </a>
+                      </Link>
                     </p>
                   </div>
                 </div>
