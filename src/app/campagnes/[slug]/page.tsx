@@ -36,7 +36,7 @@ const Page = () => {
   return (
     <div>
       {summary.length > 0 && (
-        <div>
+        <div className="text-white">
           <div>Adresse du contrat : {params.slug}</div>
           <div>Contribution minimal : {summary[0]} WEI</div>
           <div>Le nombre de demande : {summary[2]}</div>

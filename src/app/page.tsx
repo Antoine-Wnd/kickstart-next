@@ -24,7 +24,7 @@ export default function CampaignIndex() {
 
   return (
     <div>
-      <h2 className=" text-xl font-semibold">Campagnes en cours </h2>
+      <h2 className=" text-xl text-white font-semibold">Campagnes en cours </h2>
       <div className="my-5 flex justify-around">
         <div>
           {campaigns.map((campaign, index) => (
@@ -37,7 +37,7 @@ export default function CampaignIndex() {
                     <p className="text-sm text-muted-foreground">
                       <Link
                         href={`/campagnes/${campaign}`}
-                        className="text-[#669bbc] font-black"
+                        className=" text-yellow-500 font-black"
                       >
                         Voir la campagne
                       </Link>
@@ -48,7 +48,7 @@ export default function CampaignIndex() {
             </Card>
           ))}
         </div>
-        <Button variant="blue" className="py-5 px-10">
+        <Button variant="yellow" className="py-5 px-10">
           <Link
             href="/campagnes/nouvelle-campagne"
             className="flex items-center justify-center"

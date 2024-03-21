@@ -11,7 +11,7 @@ import {
 
 function Header() {
   return (
-    <div className="bg-gray-700 p-4 rounded-lg drop-shadow-md mt-2 mx-2">
+    <div className="bg-yellow-600 p-4 rounded-lg drop-shadow-md mt-2 mx-2">
       <div className="flex justify-between items-center">
         {/* Logo à gauche */}
         <NavigationMenu>
