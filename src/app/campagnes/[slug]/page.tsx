@@ -1,35 +1,46 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+
 import campaign from "../../../../ethereum/campaign";
+import { useParams } from "next/navigation";
 
 const Page = () => {
-  const [summary, setSummary] = useState([]);
-  const [errorMessage, setErrorMessage] = useState("");
+  const params = useParams<{ slug: string }>();
+
+  const [summary, setSummary] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // @ts-ignore
-        const summary = await campaign.methods.getSummary().call();
-        setSummary(summary);
+        const selectedCampaign = campaign(params.slug);
+        const summary: Record<number, BigInt> = await selectedCampaign.methods
+          .getSummary()
+          .call();
+
+        // Convertir les valeurs BigInt en chaînes
+        const convertedSummary = Object.values(summary).map((value) =>
+          value.toString()
+        );
+
+        setSummary(convertedSummary);
+        console.log(summary);
+        console.log(params.slug);
       } catch (error) {
-        // @ts-ignore
-        setErrorMessage(error.message);
+        console.error("Error fetching campaign summary:", error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [params.slug]);
 
   return (
     <div>
-      {errorMessage && <div className="error-message">{errorMessage}</div>}
-      {summary && (
+      {summary.length > 0 && (
         <div>
-          <div>Address: {summary[0]}</div>
-          <div>Minimum Contribution: {summary[1]}</div>
-          <div>Number of Requests: {summary[2]}</div>
-          <div>Balance: {summary[3]}</div>
+          <div>Adresse du contrat : {params.slug}</div>
+          <div>Contribution minimal : {summary[0]} WEI</div>
+          <div>Le nombre de demande : {summary[2]}</div>
+          <div>Balance : {summary[3]}</div>
         </div>
       )}
     </div>

@@ -1,3 +1,5 @@
+"use client";
+import { useEffect, useState } from "react";
 import factory from "../../ethereum/factory";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -5,10 +7,20 @@ import { PlusCircledIcon } from "@radix-ui/react-icons";
 import "./globals.css";
 import Link from "next/link";
 
-export default async function CampaignIndex() {
-  const campaigns = await FetchCampaigns();
+export default function CampaignIndex() {
+  const [campaigns, setCampaigns] = useState([]);
 
-  console.log(campaigns);
+  useEffect(() => {
+    const fetchCampaigns = async () => {
+      try {
+        const campaigns = await FetchCampaigns();
+        setCampaigns(campaigns);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des campagnes :", error);
+      }
+    };
+    fetchCampaigns();
+  }, []);
 
   return (
     <div>
@@ -16,7 +28,7 @@ export default async function CampaignIndex() {
       <div className="my-5 flex justify-around">
         <div>
           {campaigns.map((campaign, index) => (
-            //mapping des campagnes en ligne
+            // Mapping des campagnes en ligne
             <Card className="mx-7 mb-5" key={index}>
               <CardContent className="p-5 px-10">
                 <div>
@@ -52,9 +64,7 @@ export default async function CampaignIndex() {
 
 export async function FetchCampaigns() {
   try {
-    const campaigns: string[] = await factory.methods
-      .getDeployedCampaigns()
-      .call();
+    const campaigns = await factory.methods.getDeployedCampaigns().call();
     console.log("Campagnes récupérées :", campaigns);
     return campaigns;
   } catch (error) {
