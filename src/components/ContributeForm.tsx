@@ -49,9 +49,7 @@ function ContributeForm() {
                 <FormControl>
                   <Input placeholder="0" type="number" {...field} />
                 </FormControl>
-                <FormDescription>
-                  Ceci est la valeur minimum pour participer à votre campagne
-                </FormDescription>
+                <FormDescription>Entrer le montant souhaitez</FormDescription>
                 <FormMessage>{confirmationMessage}</FormMessage>
               </FormItem>
             )}
