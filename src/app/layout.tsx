@@ -17,9 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className="bg-gradient-to-r to-violet-800  from-fuchsia-950">
+      <body className="bg-gradient-to-r from-[#23102C] to-[#563367]">
         <Header />
-        <main className="my-0 py-16 px-10">{children}</main>
+        <main className="my-0 py-12 px-16">{children}</main>
       </body>
     </html>
   );
