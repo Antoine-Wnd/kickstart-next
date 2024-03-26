@@ -65,7 +65,6 @@ export default function CampaignIndex() {
 export async function FetchCampaigns() {
   try {
     const campaigns = await factory.methods.getDeployedCampaigns().call();
-    console.log("Campagnes récupérées :", campaigns);
     return campaigns;
   } catch (error) {
     console.error("Erreur lors de la récupération des campagnes :", error);

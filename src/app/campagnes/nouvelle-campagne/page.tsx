@@ -1,5 +1,6 @@
 "use client";
 
+import { redirect } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -36,7 +37,7 @@ function CampaignNew() {
   const [isLoading, setIsLoading] = useState(false);
 
   async function onSubmit(values: z.infer<typeof campaignFormSchema>) {
-    setConfirmationMessage("Votre contribution a été soumise avec succès");
+    setConfirmationMessage("Votre demande est en cours... ");
     setIsLoading(true);
 
     try {
@@ -45,10 +46,11 @@ function CampaignNew() {
       await factory.methods.createCampaign(values.minimum).send({
         from: accounts[0],
       });
+      setConfirmationMessage("Votre campagne  bien était créée");
     } catch (e) {
       console.log(e);
       setConfirmationMessage(
-        "Une erreur s'est produite lors de la soumission de votre contribution."
+        "Une erreur s'est produite lors de la création de votre campagne."
       );
     }
     setIsLoading(false);

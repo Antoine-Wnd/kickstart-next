@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Form, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import {
+  Form,
   FormControl,
   FormDescription,
   FormField,
@@ -13,31 +14,56 @@ import { Loader2 } from "lucide-react";
 import { Input } from "./ui/input";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import campaign from "../../ethereum/campaign";
+// @ts-ignore
+import web3 from "../../ethereum/web3";
 
-function ContributeForm() {
-  const campaignFormSchema = z.object({
+interface ContributeFormProps {
+  slugCampaign: string;
+  fetchData: () => Promise<void>; // Mettre en place le type correct pour fetchData
+}
+
+function ContributeForm({ slugCampaign, fetchData }: ContributeFormProps) {
+  const [confirmationMessage, setConfirmationMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const ContributeFormSchema = z.object({
     minimum: z.string().max(5),
   });
 
-  const form = useForm<z.infer<typeof campaignFormSchema>>({
-    resolver: zodResolver(campaignFormSchema),
+  const form = useForm<z.infer<typeof ContributeFormSchema>>({
+    resolver: zodResolver(ContributeFormSchema),
     defaultValues: {
       minimum: "",
     },
   });
 
-  async function onSubmit(values: z.infer<typeof campaignFormSchema>) {
+  async function onSubmit(values: z.infer<typeof ContributeFormSchema>) {
     setConfirmationMessage("Votre contribution a été soumise avec succès");
     setIsLoading(true);
-    //a Faire //
+
+    try {
+      // @ts-ignore
+      const accounts = await web3.eth.getAccounts();
+      const selectedCampaign = campaign(slugCampaign);
+
+      // @ts-ignore
+      await selectedCampaign.methods.contribute().send({
+        from: accounts[0],
+        value: values.minimum,
+      });
+      fetchData();
+    } catch (e) {
+      console.log(e);
+      setConfirmationMessage(
+        "Une erreur s'est produite lors de la soumission de votre contribution."
+      );
+    }
     setIsLoading(false);
   }
 
-  const [confirmationMessage, setConfirmationMessage] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-
   return (
-    <div>
+    <div className="mt-10 bg-gradient-to-br from-yellow-400 to-yellow-600 p-5 rounded-md">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-96">
           <FormField
@@ -45,8 +71,10 @@ function ContributeForm() {
             name="minimum"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Contribution minimale en WEI</FormLabel>
-                <FormControl>
+                <FormLabel className=" text-white text-xl">
+                  Combien voulez-vous investir ?
+                </FormLabel>
+                <FormControl className=" mt-2">
                   <Input placeholder="0" type="number" {...field} />
                 </FormControl>
                 <FormDescription>Entrer le montant souhaitez</FormDescription>
@@ -54,14 +82,14 @@ function ContributeForm() {
               </FormItem>
             )}
           />
-          <Button disabled={isLoading} type="submit">
+          <Button variant={"yellow"} disabled={isLoading} type="submit">
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Création en cours...
+                Chargement ...
               </>
             ) : (
-              "Créer!"
+              "Contribuez !"
             )}
           </Button>
         </form>
