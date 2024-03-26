@@ -20,7 +20,7 @@ import web3 from "../../ethereum/web3";
 
 interface ContributeFormProps {
   slugCampaign: string;
-  fetchData: () => Promise<void>; // Mettre en place le type correct pour fetchData
+  fetchData: () => Promise<void>;
 }
 
 function ContributeForm({ slugCampaign, fetchData }: ContributeFormProps) {
@@ -39,7 +39,7 @@ function ContributeForm({ slugCampaign, fetchData }: ContributeFormProps) {
   });
 
   async function onSubmit(values: z.infer<typeof ContributeFormSchema>) {
-    setConfirmationMessage("Votre contribution a été soumise avec succès");
+    setConfirmationMessage("Votre contribution est en cours de traitement");
     setIsLoading(true);
 
     try {
@@ -52,6 +52,7 @@ function ContributeForm({ slugCampaign, fetchData }: ContributeFormProps) {
         from: accounts[0],
         value: values.minimum,
       });
+      setConfirmationMessage("Votre contribution à bien était prise en compte");
       fetchData();
     } catch (e) {
       console.log(e);
