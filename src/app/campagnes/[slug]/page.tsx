@@ -6,6 +6,8 @@ import campaign from "../../../../ethereum/campaign";
 import { useParams } from "next/navigation";
 import { Card } from "@/components/ui/card";
 import ContributeForm from "@/components/ContributeForm";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const Page = () => {
   const params = useParams<{ slug: string }>();
@@ -36,9 +38,9 @@ const Page = () => {
 
   return (
     <div>
-      <h2 className=" text-yellow-500 font-custom text-3xl mb-6">
+      <h1 className=" text-yellow-500 font-custom text-3xl mb-6">
         La campagne
-      </h2>
+      </h1>
       {/* Adresse du contrat */}
       <div>
         <div className=" h-3/4 ">
@@ -63,7 +65,7 @@ const Page = () => {
         Détails
       </h2>
       <div className="grid grid-cols-4">
-        <Card className="h-72 w-80 m-auto bg-gradient-to-br from-yellow-400 to-yellow-600 flex flex-col border-none">
+        <Card className="h-72 w-80 m-auto bg-gradient-to-br from-yellow-400 to-yellow-600 flex flex-col border-none shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)]">
           <div className=" h-3/4 flex justify-center items-center text-center">
             <h3 className=" font-custom text-white text-5xl">
               Nombre de demande(s)
@@ -75,7 +77,7 @@ const Page = () => {
             </span>
           </div>
         </Card>
-        <Card className="h-72 w-80 m-auto bg-gradient-to-br from-yellow-400 to-yellow-600 flex flex-col border-none">
+        <Card className="h-72 w-80 m-auto bg-gradient-to-br from-yellow-400 to-yellow-600 flex flex-col border-none shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)]">
           <div className=" h-3/4 flex justify-center items-center text-center">
             <h3 className=" font-custom text-white text-5xl">Balance</h3>
           </div>
@@ -89,7 +91,7 @@ const Page = () => {
             </span>
           </div>
         </Card>
-        <Card className="h-72 w-80 m-auto bg-gradient-to-br from-yellow-400 to-yellow-600 flex flex-col border-none">
+        <Card className="h-72 w-80 m-auto bg-gradient-to-br from-yellow-400 to-yellow-600 flex flex-col border-none shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)]">
           <div className=" h-3/4 flex justify-center items-center text-center">
             <h3 className=" font-custom text-white text-5xl">
               Contribution minimal
@@ -101,7 +103,7 @@ const Page = () => {
             </span>
           </div>
         </Card>
-        <Card className="h-72 w-80 m-auto bg-gradient-to-br from-yellow-400 to-yellow-600 flex flex-col border-none">
+        <Card className="h-72 w-80 m-auto bg-gradient-to-br from-yellow-400 to-yellow-600 flex flex-col border-none shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)]">
           <div className=" h-3/4 flex justify-center items-center text-center">
             <h3 className=" font-custom text-white text-5xl">
               Nombre de contributeur(s)
@@ -113,6 +115,16 @@ const Page = () => {
             </span>
           </div>
         </Card>
+      </div>
+      <div className="mt-20 flex justify-end">
+        <Button variant="yellow" className="py-6 px-10">
+          <Link
+            href={`/campagnes/${params.slug}/requests`}
+            className=" text-lg flex items-center justify-center"
+          >
+            Voir les requêtes de la campagne
+          </Link>
+        </Button>
       </div>
       <div className=" mt-20 flex flex-col items-center">
         <h2 className=" text-5xl font-custom text-center text-yellow-500">

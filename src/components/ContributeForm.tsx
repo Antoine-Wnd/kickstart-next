@@ -64,7 +64,7 @@ function ContributeForm({ slugCampaign, fetchData }: ContributeFormProps) {
   }
 
   return (
-    <div className="mt-10 bg-gradient-to-br from-yellow-400 to-yellow-600 p-5 rounded-md">
+    <div className="mt-10 bg-gradient-to-br from-yellow-400 to-yellow-600 p-5 rounded-md shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)]">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-96">
           <FormField
