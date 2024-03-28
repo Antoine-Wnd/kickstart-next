@@ -19,6 +19,7 @@ import { Loader2 } from "lucide-react";
 
 // @ts-ignore
 import web3 from "../../../../../../ethereum/web3";
+import Link from "next/link";
 
 function newRequest() {
   const params = useParams<{ slug: string }>();
@@ -67,7 +68,10 @@ function newRequest() {
   }
   return (
     <div>
-      <h1 className="text-yellow-500 font-custom text-3xl mb-6">
+      <Button variant={"yellow"}>
+        <Link href={`/campagnes/${params.slug}/requests`}>Retour</Link>
+      </Button>
+      <h1 className="text-yellow-500 font-custom text-3xl my-6">
         Créer une nouvelle requête à cette campagne
       </h1>
       <div className="mt-10 mx-auto w-min bg-gradient-to-br from-yellow-400 to-yellow-600 p-5 rounded-md shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)]">
@@ -81,7 +85,9 @@ function newRequest() {
               name="desc"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>La description de votre requête</FormLabel>
+                  <FormLabel className=" text-white text-md">
+                    La description de votre requête
+                  </FormLabel>
                   <FormControl>
                     <Input placeholder="Achat des batteries" {...field} />
                   </FormControl>
@@ -93,7 +99,7 @@ function newRequest() {
               name="value"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
+                  <FormLabel className=" text-white text-md">
                     Le montant à atteindre pour votre requête
                   </FormLabel>
                   <FormControl>
@@ -107,14 +113,16 @@ function newRequest() {
               name="recipient"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Adresse du réceveur</FormLabel>
+                  <FormLabel className=" text-white text-md">
+                    Adresse du réceveur
+                  </FormLabel>
                   <FormControl>
                     <Input placeholder="0x75114..." {...field} />
                   </FormControl>
                 </FormItem>
               )}
             />
-            <Button disabled={isLoading} type="submit">
+            <Button disabled={isLoading} variant={"purple"} type="submit">
               {isLoading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />

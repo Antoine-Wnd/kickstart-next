@@ -24,7 +24,15 @@ export default function CampaignIndex() {
 
   return (
     <div>
-      <h2 className=" text-xl text-white font-semibold">Campagnes en cours </h2>
+      <div className="w-full text-center">
+        <h1 className="bg-gradient-to-r from-yellow-500 via-pink-300 via-75% to-yellow-500 inline-block text-transparent bg-clip-text font-custom text-8xl my-6 text-center mb-10 mx-auto">
+          Kick Start
+        </h1>
+      </div>
+
+      <h2 className=" text-3xl font-custom text-yellow-500 font-semibold">
+        Campagnes en cours
+      </h2>
       <div className="my-5 flex justify-around">
         <div>
           {campaigns.map((campaign, index) => (

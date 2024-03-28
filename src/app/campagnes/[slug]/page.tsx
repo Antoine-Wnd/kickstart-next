@@ -38,26 +38,29 @@ const Page = () => {
 
   return (
     <div>
-      <h1 className=" text-yellow-500 font-custom text-3xl mb-6">
+      <Button variant={"yellow"}>
+        <Link href="/">Retour</Link>
+      </Button>
+
+      <h1 className=" text-yellow-500 font-custom text-3xl my-6">
         La campagne
       </h1>
       {/* Adresse du contrat */}
-      <div>
-        <div className=" h-3/4 ">
+      <div className="flex justify-around">
+        <div className=" text-center">
           <h3 className=" font-custom text-white text-3xl">
             addresse du contrat
           </h3>
+          <span className=" text-white font-custom text-xl">{params.slug}</span>
         </div>
-        <span className=" text-white font-custom text-xl">{params.slug}</span>
 
         {/* Adresse du manager */}
-
-        <div className=" h-3/4 mt-10">
+        <div className=" text-center">
           <h3 className=" font-custom text-white text-3xl">
             addresse du manager
           </h3>
+          <span className=" text-white font-custom text-xl">{summary[4]}</span>
         </div>
-        <span className=" text-white font-custom text-xl">{summary[4]}</span>
       </div>
 
       {/* Grille de cards de 2x2 avec le reste des infos */}
