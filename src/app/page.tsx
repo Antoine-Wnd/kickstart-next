@@ -20,7 +20,7 @@ export default function CampaignIndex() {
       }
     };
     fetchCampaigns();
-  }, []);
+  }, [campaigns]);
 
   return (
     <div>
