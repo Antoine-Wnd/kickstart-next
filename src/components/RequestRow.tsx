@@ -6,6 +6,8 @@ import { Button } from "./ui/button";
 import campaign from "../../ethereum/campaign";
 
 function RequestRow({ id, request, approversCount, address }: any) {
+  const readyToFinalize =
+    Number(request.approvalCount) > Number(approversCount) / 2;
   const onApprove = async () => {
     //@ts-ignore
     const accounts = await web3.eth.getAccounts();
@@ -25,7 +27,15 @@ function RequestRow({ id, request, approversCount, address }: any) {
   };
 
   return (
-    <TableRow className="text-white">
+    <TableRow
+      className={
+        request.complete
+          ? "text-gray-400"
+          : readyToFinalize
+          ? "text-green-700"
+          : "text-white"
+      }
+    >
       <TableCell className="font-medium">{id}</TableCell>
       <TableCell>{request.description}</TableCell>
       <TableCell>
@@ -39,14 +49,18 @@ function RequestRow({ id, request, approversCount, address }: any) {
         {Number(request.approvalCount)} / {Number(approversCount)}
       </TableCell>
       <TableCell>
-        <Button variant={"green"} onClick={onApprove}>
-          Approuver
-        </Button>
+        {request.complete ? null : (
+          <Button variant={"green"} onClick={onApprove}>
+            Approuver
+          </Button>
+        )}
       </TableCell>
       <TableCell>
-        <Button variant={"yellow"} onClick={onFinalize}>
-          Finaliser
-        </Button>
+        {request.complete ? null : (
+          <Button variant={"yellow"} onClick={onFinalize}>
+            Finaliser
+          </Button>
+        )}
       </TableCell>
     </TableRow>
   );
