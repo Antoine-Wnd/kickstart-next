@@ -28,7 +28,7 @@ function ContributeForm({ slugCampaign, fetchData }: ContributeFormProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const ContributeFormSchema = z.object({
-    minimum: z.string().max(5),
+    minimum: z.string().max(50),
   });
 
   const form = useForm<z.infer<typeof ContributeFormSchema>>({

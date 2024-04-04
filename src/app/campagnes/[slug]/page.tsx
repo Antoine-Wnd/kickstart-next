@@ -63,7 +63,7 @@ const Page = () => {
         </div>
       </div>
 
-      {/* Grille de cards de 2x2 avec le reste des infos */}
+      {/* Grille de 4 cards avec le reste des infos */}
       <h2 className=" text-yellow-500 font-custom text-3xl mb-6 mt-10">
         Détails
       </h2>
@@ -88,9 +88,9 @@ const Page = () => {
             <span className=" text-white font-custom text-3xl">
               {
                 //@ts-ignore
-                summary[1]
+                summary[1] / 1000000000000000000
               }{" "}
-              Wei
+              Eth
             </span>
           </div>
         </Card>

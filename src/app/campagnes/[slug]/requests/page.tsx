@@ -17,12 +17,15 @@ import RequestRow from "@/components/RequestRow";
 
 function RequestIndex() {
   const [requests, setRequests] = useState<any[]>([]);
+  const [approversCount, setApproversCount] = useState<number>(0); // Ajout de l'état pour stocker approversCount
+
   const params = useParams<{ slug: string }>();
 
   useEffect(() => {
     async function fetchData() {
       const data = await fetchRequests(params.slug);
       setRequests(data.requests);
+      setApproversCount(data.approversCount);
     }
     fetchData();
   }, [params.slug]);
@@ -33,6 +36,10 @@ function RequestIndex() {
       .getRequestsCount()
       .call();
 
+    const approversCount = await selectedCampaign.methods
+      .approversCount()
+      .call();
+
     const requests = await Promise.all(
       Array(parseInt(requestCount))
         .fill(null)
@@ -40,14 +47,19 @@ function RequestIndex() {
           return selectedCampaign.methods.requests(index).call();
         })
     );
-    console.log(requests);
-    return { params, requestCount, requests };
+    return { params, requestCount, requests, approversCount };
   }
 
   const renderRows = (requests: any) => {
     return requests.map((request: any, index: number) => {
       return (
-        <RequestRow key={index} id={index} request={request} address={params} />
+        <RequestRow
+          key={index}
+          id={index}
+          request={request}
+          address={params}
+          approversCount={approversCount}
+        />
       );
     });
   };
@@ -81,7 +93,7 @@ function RequestIndex() {
               <TableRow className=" ">
                 <TableHead className="w-[100px] text-yellow-500">ID</TableHead>
                 <TableHead className="text-yellow-500">Description</TableHead>
-                <TableHead className="text-yellow-500">Somme</TableHead>
+                <TableHead className="text-yellow-500">Somme (eth)</TableHead>
                 <TableHead className="text-yellow-500">Receveur</TableHead>
                 <TableHead className="text-yellow-500">
                   Nombre d'approbations
