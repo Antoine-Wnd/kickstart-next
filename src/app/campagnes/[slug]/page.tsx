@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import campaign from "../../../../ethereum/campaign";
 //@ts-ignore
@@ -14,11 +14,7 @@ const Page = () => {
 
   const [summary, setSummary] = useState<string[]>([]);
 
-  useEffect(() => {
-    fetchData();
-  }, [params.slug]);
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       const selectedCampaign = campaign(params.slug);
       const summary: Record<number, BigInt> = await selectedCampaign.methods
@@ -34,7 +30,11 @@ const Page = () => {
     } catch (error) {
       console.error("Error fetching campaign summary:", error);
     }
-  };
+  }, [params.slug]);
+
+  useEffect(() => {
+    fetchData();
+  }, [params.slug, fetchData]);
 
   return (
     <div>

@@ -96,7 +96,7 @@ function RequestIndex() {
                 <TableHead className="text-yellow-500">Somme (eth)</TableHead>
                 <TableHead className="text-yellow-500">Receveur</TableHead>
                 <TableHead className="text-yellow-500">
-                  Nombre d'approbations
+                  Nombre d approbations
                 </TableHead>
                 <TableHead className="text-yellow-500">Approuver</TableHead>
                 <TableHead className="text-yellow-500">Finaliser</TableHead>

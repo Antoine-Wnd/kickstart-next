@@ -21,7 +21,7 @@ import { Loader2 } from "lucide-react";
 import web3 from "../../../../../../ethereum/web3";
 import Link from "next/link";
 
-function newRequest() {
+function NewRequest() {
   const params = useParams<{ slug: string }>();
 
   const [confirmationMessage, setConfirmationMessage] = useState("");
@@ -140,4 +140,4 @@ function newRequest() {
   );
 }
 
-export default newRequest;
+export default NewRequest;
